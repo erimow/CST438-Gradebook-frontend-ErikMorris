@@ -53,6 +53,7 @@ function ListAssignment(props) {
                   ))}
                 </tbody>
               </table>
+              <Link to={`/addAssignment/`}>Add Assignment</Link>
           </div>
       </div>
     )
