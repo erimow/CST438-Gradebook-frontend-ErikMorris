@@ -22,11 +22,32 @@ function ListAssignment(props) {
       setAssignments(data);
      }) 
     .catch(err => console.error(err)); 
-  }
+  };
+
+
+  const deleteAssignment = (id) => 
+  {
+    fetch(`${SERVER_URL}/assignment/${id}` ,
+    {  
+      method: 'DELETE'
+    } )
+.then(res => {
+    if (res.ok) {
+      //fetchGrades(assignmentId);
+      setMessage("Assignment Deleted.");
+      window.location.reload(false);  
+    } else {
+      setMessage("Save error. "+res.status);
+      console.error('Delete assignment error =' + res.status);
+}})
+  .catch(err => {
+      setMessage("Exception. "+err);
+      console.error('Delete assignment exception =' + err);
+  });
+};        
   
-  
-    const headers = ['Assignment Name', 'Course Title', 'Due Date', ' ', ' ', ' '];
-    
+const headers = ['Assignment Name', 'Course Title', 'Due Date', ' ', ' ', ' '];
+
     return (
       <div>
         <h3>Assignments</h3>
@@ -47,8 +68,8 @@ function ListAssignment(props) {
                       <td>
                         <Link to={`/gradeAssignment/${assignments[idx].id}`} >Grade</Link>
                       </td>
-                      <td>Edit</td>
-                      <td>Delete</td>
+                      <td><Link to={`/editAssignment/${assignments[idx].id}`}>Edit</Link></td>
+                      <td><button onClick={()=>deleteAssignment(assignments[idx].id)}>Delete</button></td>
                     </tr>
                   ))}
                 </tbody>

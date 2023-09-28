@@ -20,39 +20,50 @@ function AddAssignment(props) {
             id:factors.assId,
             assignmentName:factors.assName,
             dueDate:factors.assDueDate,
-            courseTitle:factors.courseTit,
+            courseTitle:factors.courseName,
             courseId:factors.classId
           })
         } )
     .then(res => {
         if (res.ok) {
           //fetchGrades(assignmentId);
-          setMessage("Grades saved.");
+          setMessage("Assignment saved.");
         } else {
           setMessage("Save error. "+res.status);
-          console.error('Save grades error =' + res.status);
+          console.error('Save assignment error =' + res.status);
     }})
       .catch(err => {
           setMessage("Exception. "+err);
-          console.error('Save grades exception =' + err);
+          console.error('Save assignment exception =' + err);
       });
  };        
+
+ const handleChange = (e) => {
+  const { name, value } = e.target;
+  setFactors(prevFactors => ({
+    ...prevFactors,
+    [name]: name === 'assId' || name === 'classId' ? parseInt(value, 10) : value
+  }));
+};
+
+ 
 
   return (
       <div>
         <h3>Add Assignment</h3>
         <h4 id="amessage" >{message}&nbsp;</h4>
         <h5>Assignment Name</h5>
-        <input name="assignmentName" value={(factors.assName)? factors.assName:""} type="text" onChange={handleChange}/>
+        <input name="assName" value={factors.assName || ""} type="text" onChange={(e) => handleChange(e)}/>
         <hr/> <h5>Assignment Id</h5>
-        <input name='id' value={(factors.assId)? factors.assId:""} type="number" onChange={setFactors(value)}/>
+        <input name='assId' value={(factors.assId)? factors.assId:""} type="number" onChange={(e) => handleChange(e)}/>
         <hr/><h5>Due Date</h5>
-        <input name='dueDate' value={(factors.assDueDate)? factors.assDueDate:""} type='text' onChange={handleChange}/>
+        <input name='assDueDate' value={(factors.assDueDate)? factors.assDueDate:""} type='text' onChange={(e) => handleChange(e)}/>
         <hr/><h5>Course Title</h5>
-        <input name='courseName' value={(factors.courseTit)? factors.courseTit:""} type='text' onChange={handleChange}/>
+        <input name='courseName' value={(factors.courseName)? factors.courseName:""} type='text' onChange={(e) => handleChange(e)}/>
         <hr/><h5>Course Id</h5>
-        <input name='classId'ref="classId" type="number"/>
-        <button id='sassign' type="button" margin="auto" onClick={saveAssignment}>Save Assignment</button>
+        <input name='classId' value={(factors.classId)? factors.classId:""} type="number" onChange={(e) => handleChange(e)}/> <hr></hr>
+        <button id='sassign' type="button" margin="auto" onClick={saveAssignment}>Save Assignment</button> <br></br>
+        <button><Link to={`/`}>Back</Link></button>
       </div>
   ); 
 }

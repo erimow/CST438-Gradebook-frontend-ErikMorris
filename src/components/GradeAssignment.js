@@ -1,6 +1,6 @@
 import React, {useState, useEffect}  from 'react';
 import {SERVER_URL} from '../constants';
-
+import {Link} from 'react-router-dom';
 
 //  required properties -  assignmentId
 //  
@@ -103,7 +103,8 @@ function GradeAssignment ( ) {
               ))}
             </tbody>
           </table>
-          <button id="sgrade" type="button" margin="auto" onClick={saveGrades}>Save Grades</button>
+          <button id="sgrade" type="button" margin="auto" onClick={saveGrades}>Save Grades</button><br></br>
+        <button><Link to={`/`}>Back</Link></button>
         </div>
       </div>
     )
