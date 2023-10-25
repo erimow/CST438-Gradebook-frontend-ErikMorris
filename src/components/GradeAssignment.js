@@ -104,7 +104,7 @@ function GradeAssignment ( ) {
             </tbody>
           </table>
           <button id="sgrade" type="button" margin="auto" onClick={saveGrades}>Save Grades</button><br></br>
-        <button><Link to={`/`}>Back</Link></button>
+        <button><Link to={`/listAssignment`}>Back</Link></button>
         </div>
       </div>
     )

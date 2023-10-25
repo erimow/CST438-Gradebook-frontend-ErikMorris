@@ -92,7 +92,7 @@ function EditAssignment(props) {
         <hr/><h5>Course Id</h5>
         <input name='classId' value={(factors.classId)} type="number" onChange={(e) => handleChange(e)}/> <hr></hr>
         <button id='sassign' type="button" margin="auto" onClick={editAssignment}>Save Assignment</button> <br></br>
-        <button><Link to={`/`}>Back</Link></button>
+        <button><Link to={`/listAssignment`}>Back</Link></button>
       </div>
   ); 
 }
